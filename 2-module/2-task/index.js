@@ -4,5 +4,7 @@
  * @returns {Boolean}
  */
 function isEmpty(obj) {
-  // ваш код...
+  return Object.keys(obj).length === 0;
 }
+
+//писал все через if, но WebStorm помогает всё упрощать)
