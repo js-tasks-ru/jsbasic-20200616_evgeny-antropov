@@ -4,32 +4,30 @@ function initCarousel() {
   let arrowRight = document.querySelector('.carousel__arrow_right');
   let slide = document.querySelector('.carousel__slide');
   let carousel = document.querySelector('.carousel__inner');
-  let position = 0;
+  let position = 0; //начальная позиция слайдера
+  let currentSlideNumber = 0; //номер текущего слайда
   let slideWidth = slide.offsetWidth;
   console.log("размер слайда:", slideWidth);
   let maxPosition = -(3 * slideWidth);
   console.log("maxPosition - ", maxPosition);
 
-  function leftShift() {
-    //сдвиг влево
-    position += slideWidth;
-    carousel.style.transform = `translate(-${position + 'px'}`;
-    return +position;
-    console.log("сдвиг влево, значение позиции - ", position);
-  }
-
-  function rightShift() {
-    //сдвиг вправо
-    position -= slideWidth;
-    carousel.style.transform = `translate(${position + 'px'})`;
-    console.log("сдвиг вправо значение позиции - ", position);
+  function carouselTranslate(position) {
+    carousel.style.transform = `translateX(${position + 'px'}`;
   }
 
   function slideMovement(button) {
     if (button === arrowLeft) {
-      leftShift();
+      //сдвиг влево
+      --currentSlideNumber;
+      position = -carousel.offsetWidth * currentSlideNumber; // номер слайда * на ширину слайда
+      carouselTranslate(position);
+      console.log("сдвиг влево, значение позиции - ", position);
     } else if (button === arrowRight) {
-      rightShift();
+      //сдвиг вправо
+      ++currentSlideNumber;
+      position = -carousel.offsetWidth * currentSlideNumber; // номер слайда * на ширину слайда
+      carouselTranslate(position);
+      console.log("сдвиг вправо значение позиции - ", position);
     }
   }
 
